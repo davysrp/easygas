@@ -29,7 +29,7 @@ return response($response,200);
 
 });
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:api']], function () {
 
     Route::get('test', function () {
 
