@@ -13,26 +13,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('register',function (){
-$user=\App\Models\User::create([
-    'name'=>'ll',
-    'email'=>'gg@gmail.com',
-    'password'=>bcrypt('123456')
-]);
-$token=$user->createToken('mytoken')->plainTextToken;
-$response=[
-    'user'=>$user,
-    'token'=>$token
-];
 
-return response($response,200);
+Route::post('/register', [\App\Http\Controllers\Auth\ApiAuthController::class,'register']);
+Route::post('/login', [\App\Http\Controllers\Auth\ApiAuthController::class,'login']);
 
-});
-
-Route::group(['middleware' => ['auth:sanctum']], function () {
-
-    Route::get('test', function () {
-
-        return response()->json();
-    });
-});
+Route::apiResource('/employee', \App\Http\Controllers\EmployeeController::class)->middleware('auth:api');
