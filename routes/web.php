@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/redirect', [\App\Http\Controllers\Auth\SocialAuthFacebookController::class,'redirect']);
+Route::get('/callback', [\App\Http\Controllers\Auth\SocialAuthFacebookController::class,'callback']);
